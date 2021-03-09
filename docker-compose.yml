@@ -10,6 +10,8 @@ services:
       dockerfile: src/SoapServer/Dockerfile
     environment:
       BROKER_LIST: broker:29092
+    ports:
+      - 80:80
 
   EventSimulator:
     image: event-simulator
@@ -19,6 +21,8 @@ services:
       dockerfile: src/EventSimulator/Dockerfile
     ports:
       - 9999:80
+    environment:
+      BROKER_LIST: 'broker:29092'
 
   KafkaConnect:
     image: kafka-connect
@@ -96,4 +100,28 @@ services:
       SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: 'broker:29092'
       SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
 
+
+  akhq:
+    # build:
+    #   context: .
+    image: tchiotludo/akhq
+    environment:
+      AKHQ_CONFIGURATION: |
+        akhq:
+          connections:
+            docker-kafka-server:
+              properties:
+                bootstrap.servers: "broker:29092"
+              schema-registry:
+                url: "http://schema-registry:8081"
+              schema-registry:
+                url: "http://schema-registry:8081"
+              connect:
+                - name: "connect"
+                  url: "http://connect:8083"
+    ports:
+      - 8080:8080
+    links:
+      - broker
+      - schema-registry
 

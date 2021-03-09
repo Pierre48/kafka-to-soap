@@ -7,7 +7,8 @@ namespace SoapServer.Services
     {
         public void HandleStop(StopRequest request)
         {
-            Console.WriteLine($"Stop request was received : {request}");
+            if (request == null) throw new ArgumentNullException(nameof(request));
+            Console.WriteLine($"Stop request was received : " + request?.ToString());
         }
     }
 }

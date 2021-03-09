@@ -23,7 +23,29 @@ namespace EventSimulator
                     while (true)
                     {
                         producer.Produce(
-                            topicName, new Message<string, string> { Key = "", Value = "" },r=>{Console.WriteLine(r.Error.Reason );});
+                            topicName, new Message<string, string> { Key = "", Value =
+"<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tem=\"http://tempuri.org/\" xmlns:soap=\"http://schemas.datacontract.org/2004/07/SoapServer.Models\">" +
+"   <soapenv:Header/>" +
+"   <soapenv:Body>" +
+"      <tem:HandleStop>" +
+"         <tem:request>" +
+"            <soap:Cause>rzerez</soap:Cause>" +
+"            <soap:Machines>" +
+"               <soap:Machine>" +
+"                  <soap:Id>Machine1</soap:Id>" +
+"                  <soap:Modules>" +
+"                     <soap:Module>" +
+"                        <soap:Id>Truscin 1</soap:Id>" +
+"                     </soap:Module>" +
+"                  </soap:Modules>" +
+"               </soap:Machine>" +
+"            </soap:Machines>" +
+$"            <soap:Timestamp>"+DateTime.Now.ToString("yyyy-MM-ddThh:mm:ssZ")+"</soap:Timestamp>" +
+"         </tem:request>" +
+"      </tem:HandleStop>" +
+"   </soapenv:Body>" +
+"</soapenv:Envelope>"
+                             },r=>{Console.WriteLine(r.Error.Reason );});
 
                         Thread.Sleep(1000);
                     }
