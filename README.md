@@ -2,6 +2,9 @@
 
 PoC about the best way to plug a kafka topic to a soap endpoint
 
+<script src="Paste the mermaid.min.js file address here"></script>
+<script>mermaid.initialize({startOnLoad:true});</script>
+
 classDiagram
 Class01 <|-- AveryLongClass : Cool
 <<interface>> Class01
