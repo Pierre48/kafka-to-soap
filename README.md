@@ -17,5 +17,5 @@ docker-compose up -d
 
 Once, everything is build, and launched, you can push the connect configuration to start the test : 
 ````
-
+curl -X POST -H "Content-Type: application/json" --data "@config/http-connect-source.json" http://localhost:8083/connectors
 ````
